@@ -15,6 +15,7 @@
 #include <linux/psp-sev.h>
 #include <attestation.h>
 #include <snp-derive-key.h>
+#include <ioctl-overrides.h>
 
 #ifndef PROG_NAME
 #define PROG_NAME	"sev-guest-kdf"
@@ -252,7 +253,7 @@ int request_key(struct options *options, uint8_t *key, size_t size)
 	int fd = -1;
 	struct snp_derived_key_req req;
 	struct snp_derived_key_resp resp;
-	struct snp_guest_request_ioctl guest_req;
+	struct guest_request_ioctl guest_req;
 	struct msg_key_resp *key_resp = (struct msg_key_resp *)&resp.data;
 
 	if (!options || !key || size < sizeof(key_resp->derived_key)) {
